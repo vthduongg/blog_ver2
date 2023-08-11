@@ -1,0 +1,68 @@
+<?php
+
+$title = "Danh sach bai post";
+$this->headTitle($title);
+
+// $tmp = array();
+// $tmp = $post->toArray();
+
+?>
+
+<h1>
+    <?= $this->escapeHtml($title) ?>
+</h1>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Post_title</th>
+            <th>Post_icon</th>
+            <th>Post_describe</th>
+            <th>Post_create_date</th>
+            <th>Post_author</th>
+            <th>Post_view</th>
+            <th>Post_content</th>
+            <th>Post_last_modify</th>
+            <th>Category_name</th>
+            <th>Post_status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($data as $element): ?>
+            <tr>
+                <td>
+                    <?= $this->escapeHtml($element->post_title) ?>
+                </td>
+                <td>
+                    <img src="/public/img/blog/<?= $this->escapeHtml($element->post_icon) ?>"
+                        alt="<?= $this->escapeHtml($element->post_icon) ?>" width="120px">
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_describe) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_create_date) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_author) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_view) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_content) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_last_modify) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->category_describe) ?>
+                </td>
+                <td>
+                    <?= $this->escapeHtml($element->post_status) ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
