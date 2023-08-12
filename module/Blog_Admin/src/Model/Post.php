@@ -29,6 +29,23 @@ class Post
         $this->category_name = !empty($data['category_name']) ? $data['category_name'] : null;
         $this->post_status = !empty($data['post_status']) ? $data['post_status'] : null;
     }
+
+    public function getArrayCopy()
+    {
+        return [
+            'post_id' => $this->post_id,
+            'post_title' => $this->post_title,
+            'post_icon' => $this->post_icon,
+            'post_describe' => $this->post_describe,
+            'post_create_date' => $this->post_create_date,
+            'post_author' => $this->post_author,
+            'post_view' => $this->post_view,
+            'post_content' => $this->post_content,
+            'post_last_modify' => $this->post_last_modify,
+            'category_name' => $this->category_name,
+            'post_status' => $this->post_status
+        ];
+    }
 }
 
 ?>

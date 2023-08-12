@@ -8,15 +8,22 @@ $this->headTitle($title);
 
 ?>
 
+<style>
+    button {
+        width: 80px;
+        margin: 3px;
+    }
+</style>
+
 <h1>
     <?= $this->escapeHtml($title) ?>
 </h1>
 
-<table class="table table-hover">
+<table class="table table-hover" style="width = 100%">
     <thead>
         <tr>
             <th>Post_title</th>
-            <th>Post_icon</th>
+            <th style="width = 10%">Post_icon</th>
             <th>Post_describe</th>
             <th>Post_create_date</th>
             <th>Post_author</th>
@@ -35,14 +42,15 @@ $this->headTitle($title);
                     <?= $this->escapeHtml($element->post_title) ?>
                 </td>
                 <td>
-                    <img src="/public/img/blog/<?= $this->escapeHtml($element->post_icon) ?>"
+                    <img src="img/blog/<?= $this->escapeHtml($element->post_icon) ?>"
                         alt="<?= $this->escapeHtml($element->post_icon) ?>" width="120px">
                 </td>
                 <td>
-                    <?= $this->escapeHtml($element->post_describe) ?>
+                    <?= $this->escapeHtml(limitContent($element['post_describe'], 70)) ?>
                 </td>
                 <td>
-                    <?= $this->escapeHtml($element->post_create_date) ?>
+                    <!-- Doi dinh dang ngay tu y/m/d sang d/m/y -->
+                    <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_create_date']))) ?>
                 </td>
                 <td>
                     <?= $this->escapeHtml($element->post_author) ?>
@@ -51,18 +59,44 @@ $this->headTitle($title);
                     <?= $this->escapeHtml($element->post_view) ?>
                 </td>
                 <td>
-                    <?= $this->escapeHtml($element->post_content) ?>
+                    <?= $this->escapeHtml(limitContent($element['post_content'], 70)) ?>
                 </td>
                 <td>
-                    <?= $this->escapeHtml($element->post_last_modify) ?>
+                    <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_last_modify']))) ?>
                 </td>
                 <td>
                     <?= $this->escapeHtml($element->category_describe) ?>
                 </td>
                 <td>
-                    <?= $this->escapeHtml($element->post_status) ?>
+                    <?php
+                    $status = $element['post_status'];
+                    if ($status == 1) {
+                        $str = "Hiện";
+                    } else {
+                        $str = "Ẩn";
+                    }
+                    ?>
+                    <?= $this->escapeHtml($str) ?>
+                </td>
+                <td>
+                    <a class="text-light btn btn-primary w-100"
+                        href=" <?= $this->url('blog_admin', ['action' => 'edit', 'id' => $element['post_id']]) ?>">Edit</a>
+                    <a class="text-light btn btn-primary w-100"
+                        href=" <?= $this->url('blog_admin', ['action' => 'hide', 'id' => $element['post_id']]) ?>">Hide</a>
+                    <a class="text-light btn btn-primary w-100"
+                        href=" <?= $this->url('blog_admin', ['action' => 'show', 'id' => $element['post_id']]) ?>">Show</a>
                 </td>
             </tr>
         <?php endforeach ?>
     </tbody>
 </table>
+
+<?php
+function limitContent($content, $limit)
+{
+    if (strlen($content) > $limit) {
+        $content = substr($content, 0, $limit - 3) . "...";
+    }
+    return $content;
+}
+?>

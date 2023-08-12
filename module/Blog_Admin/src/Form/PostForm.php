@@ -14,8 +14,10 @@ use Zend\Validator\StringLength;
 
 class PostForm extends Form
 {
-    public function __construct()
+    private $action;
+    public function __construct($action = "add")
     {
+        $this->action = $action;
         parent::__construct();
         $this->setAttributes([
             'class' => 'form-horizontal',
@@ -53,6 +55,14 @@ class PostForm extends Form
         $file = new Element\File('post_icon');
         $file->setLabel('Chọn ảnh: ')
             ->setAttribute('class', 'form-label');
+        $file->setAttributes([
+            'type' => 'file'
+        ]);
+        if ($this->action == "add") {
+            $file->setAttributes([
+                'required' => 'required'
+            ]);
+        }
         $this->add($file);
         //input describe
         $post_describe = new Element\Textarea('post_describe');
@@ -95,15 +105,15 @@ class PostForm extends Form
         ]);
         $this->add($post_content);
         //select option
-        $category_id = new Element\Select('category_id');
-        $category_id->setLabel('Chọn chỉ mục: ')
+        $category_name = new Element\Select('category_name');
+        $category_name->setLabel('Chọn chỉ mục: ')
             ->setLabelAttributes([
                 'class' => 'control-label'
             ]);
-        $category_id->setAttributes([
+        $category_name->setAttributes([
             'class' => 'form-control'
         ]);
-        $this->add($category_id);
+        $this->add($category_name);
 
         //button submit
         $this->add([
@@ -149,43 +159,45 @@ class PostForm extends Form
             ]
         ]);
 
-        $inputFilter->add([
-            'name' => 'post_icon',
-            'required' => true,
-            'filter' => [
-                ['post_icon' => 'StringTrim']
-            ],
-            'validators' => [
-                [
-                    'name' => 'NotEmpty',
-                    'options' => [
-                        'messages' => [
-                            NotEmpty::IS_EMPTY => "Vui lòng tải ảnh lên!!!"
-                        ]
-                    ]
+        if ($this->action == "add") {
+            $inputFilter->add([
+                'name' => 'post_icon',
+                'required' => true,
+                'filter' => [
+                    ['post_icon' => 'StringTrim']
                 ],
-                [
-                    'name' => 'filesize',
-                    'options' => [
-                        'max' => 2 * 1024 * 1024,
-                        'messages' => [
-                            Size::TOO_BIG => 'File quá nhỏ, dung lượng ít nhất %min%'
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                                NotEmpty::IS_EMPTY => "Vui lòng tải ảnh lên!!!"
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    'name' => 'fileMimeType',
-                    'options' => [
-                        'mimetype' => 'image/png, image/jpeg, image/jpg, image/gif',
-                        'messages' => [
-                            MimeType::FALSE_TYPE => 'Kiểu file %type% không được phép chọn',
-                            MimeType::NOT_DETECTED => 'MimeType không xác định',
-                            MimeType::NOT_DETECTED => 'MimeType không thể đọc'
+                    ],
+                    [
+                        'name' => 'filesize',
+                        'options' => [
+                            'max' => 2 * 1024 * 1024,
+                            'messages' => [
+                                Size::TOO_BIG => 'File quá nhỏ, dung lượng ít nhất %min%'
+                            ]
+                        ]
+                    ],
+                    [
+                        'name' => 'fileMimeType',
+                        'options' => [
+                            'mimetype' => 'image/png, image/jpeg, image/jpg, image/gif',
+                            'messages' => [
+                                MimeType::FALSE_TYPE => 'Kiểu file %type% không được phép chọn',
+                                MimeType::NOT_DETECTED => 'MimeType không xác định',
+                                MimeType::NOT_DETECTED => 'MimeType không thể đọc'
+                            ]
                         ]
                     ]
                 ]
-            ]
-        ]);
+            ]);
+        }
 
         $inputFilter->add([
             'name' => 'post_content',
