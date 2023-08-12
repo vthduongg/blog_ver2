@@ -1,0 +1,103 @@
+<?php
+//foreach trong database no la 1 con tro khi ma loop chay het => mang chua du lieu chi con 
+//lai phan tu cuoi cung nen khong dung duoc foreach nhieu lan vi vay truoc khi muon foreach nhieu lan 
+//nen chuyen ve dang array
+$tmp = array();
+$tmp = $blog->toArray();
+$count = 0;
+?>
+<style>
+    .content img {
+        max-width: 635px;
+        margin: 0 auto;
+        height: auto;
+        display: block;
+    }
+</style>
+<div class="row">
+    <div class="col-7">
+        <a href="<?= $this->url('blog') ?>"> Trang chủ </a> /
+        <a href="<?= $this->url('blog') ?>">
+            <?=
+                $this->escapeHtml($category_name);
+            ?>
+        </a> /
+        <a href="<?= $this->url('blog') ?>"> Test </a>
+        <h3>
+            <?=
+                $this->escapeHtml($post_title);
+            ?>
+        </h3>
+        <table style="width:100%">
+            <tr>
+                <td style="width: 15%">
+                    <p>
+                        <?=
+                            $this->escapeHtml(date("d/m/Y", strtotime($post_create_date)));
+                        ?>
+                    </p>
+                </td>
+                <td style="width: 60%">
+                    <p>
+                        <?=
+                            $this->escapeHtml($post_view) . " lượt xem";
+                        ?>
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        <?=
+                            "Chia sẻ bởi " . $this->escapeHtml($post_author);
+                        ?>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <hr style="margin-top = 0">
+        <div>
+
+            <div class="content">
+                <?php echo $post_content; ?>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="col-4">
+        <table>
+            <tr>
+                <h4>Nổi bật</h4>
+            </tr>
+            <?php foreach ($tmp as $element): ?>
+                <?php
+                $count++;
+                if ($count === 6) {
+                    break;
+                }
+                ?>
+                <tr>
+                    <td rowspan="2">
+                        <a href=" <?= $this->url('blog', ['action' => 'detail', 'id' => $element['post_id']]) ?>">
+                            <img src="../../img/blog/<?= $this->escapeHtml($element['post_icon']) ?>"
+                                alt="<?= $this->escapeHtml($element['post_title']) ?>" width="120px">
+                        </a>
+                    </td>
+                    <td colspan="2" style="padding-left: 7px">
+                        <a href=" <?= $this->url('blog', ['action' => 'detail', 'id' => $element['post_id']]) ?>">
+                            <?= $this->escapeHtml($element['post_title']) ?>
+                        </a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="padding-left: 7px; font-size: 8; opacity: 70%;">
+                        <?= $this->escapeHtml($element['post_author']) ?>
+                    </td>
+                    <td style="padding-left: 7px; font-size: 8; opacity: 70%;">
+                        <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_create_date']))) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

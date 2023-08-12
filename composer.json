@@ -21,7 +21,8 @@
   "autoload": {
     "psr-4": {
       "Application\\": "module/Application/src/",
-      "Blog_Admin\\": "module/Blog_Admin/src"
+      "Blog_Admin\\": "module/Blog_Admin/src",
+      "Blog\\": "module/Blog/src"
     }
   },
   "autoload-dev": {
