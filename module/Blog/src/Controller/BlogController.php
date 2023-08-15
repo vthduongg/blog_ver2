@@ -4,25 +4,26 @@ namespace Blog\Controller;
 
 // use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Blog\Form\BlogForm;
-// use Blog\Model\Blog;
-// use Blog\BlogForm;
 use Blog\Model\Post;
 use Blog\Model\PostTable;
+use Blog\Model\Category;
+use Blog\Model\CategoryTable;
 use Zend\File\Transfer\Adapter\Http;
 use Zend\Filter\File\Rename;
 use Zend\Mvc\Controller\AbstractActionController;
-// use Zend\Uri\Http;
 use Zend\View\Model\ViewModel;
 
 class BlogController extends AbstractActionController
 {
     // Add this property:
-    private $table;
+    private $postTable;
+    private $categoryTable;
 
     // Add this constructor:
-    public function __construct($table)
+    public function __construct(PostTable $postTable, CategoryTable $categoryTable)
     {
-        $this->table = $table;
+        $this->postTable = $postTable;
+        $this->categoryTable = $categoryTable;
     }
 
     public function indexAction()
@@ -34,61 +35,42 @@ class BlogController extends AbstractActionController
 
         //Lay cac bai viet khong bi an
         return new ViewModel([
-            'post' => $this->table->select(),
+            'post' => $this->postTable->select(),
         ]);
     }
 
-    public function categoryAction()
-    {
-        $id = (int) $this->params()->fromRoute('id', 0);
-        if ($id === 0) {
-            return $this->redirect()->toRoute('blog', ['controller' => 'BlogController', 'action' => 'index']);
-        }
-        try {
-            $post = $this->table->selectCategory($id);
-        } catch (\Exception $e) {
-            return $this->redirect()->toRoute('blog', ['action' => 'index']);
-        }
-        // return new ViewModel(
-        //     [
-        //         'post' => $this->table->selectCategory($id),
-        //     ]
-        // );
-
-        $post = $this->table->selectCategory($id);
-
-        echo '<pre>';
-        print_r($post);
-        echo '</pre>';
-        return false;
-    }
 
     public function detailAction()
     {
-
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id === 0) {
             return $this->redirect()->toRoute('blog', ['controller' => 'BlogController', 'action' => 'index']);
         }
         try {
-            $post = $this->table->findPost($id);
+            $post = $this->postTable->findPost($id);
         } catch (\Exception $e) {
             return $this->redirect()->toRoute('post', ['action' => 'index']);
         }
-        $blog = $this->table->findPost($id);
+        $post1 = $this->categoryTable->selectCategory($id);
+        $name = $this->categoryTable->selectCategory($post1->parent_id);
+        $blog = $this->postTable->findPost($id);
+        $category = $this->postTable->findPost($id);
+        $nameparent = $this->categoryTable->selectCategory($category->category_name);
         $data = new ViewModel([
-            'blog' => $this->table->select(),
+            'blog' => $this->postTable->select(),
             'post_title' => $blog->post_title,
             'post_create_date' => $blog->post_create_date,
             'post_view' => $blog->post_view,
             'post_author' => $blog->post_author,
             'post_content' => $blog->post_content,
-            'category_name' => $blog->category_name,
+            'name' => $name->category_name,
+            'parent' => $nameparent->category_name,
         ]);
 
-        $this->table->addViewPost($post);
+        $this->postTable->addViewPost($post);
         return $data;
     }
+
 
 }
 

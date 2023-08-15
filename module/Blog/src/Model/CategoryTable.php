@@ -9,7 +9,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
-class PostTable
+class CategoryTable
 {
     private $tableGateway;
     //Phuong thuc de truyen du lieu vao tablegateway
@@ -61,10 +61,10 @@ class PostTable
         return $this->tableGateway->select(['post_status' => 1]);
     }
 
-    public function findPost($id)
+    public function selectCategory($id)
     {
-        $post_id = (int) $id;
-        $rowset = $this->tableGateway->select(['post_id' => $id]);
+        $category_id = $id;
+        $rowset = $this->tableGateway->select(['category_id' => $id]);
         $row = $rowset->current();
         if (!$row) {
             throw new RuntimeException(
@@ -75,65 +75,6 @@ class PostTable
             );
         }
         return $row;
-    }
-    public function savePost(Post $post)
-    {
-        $data = [
-            'post_id' => $post->post_id,
-            'post_title' => $post->post_title,
-            'post_icon' => $post->post_icon,
-            'post_describe' => $post->post_describe,
-            'post_create_date' => $post->post_create_date = date("Y-m-d"),
-            'post_content' => $post->post_content,
-            'post_last_modify' => $post->post_last_modify = date("Y-m-d"),
-            'post_status' => $post->post_status = 1
-        ];
-
-        $id = (int) $post->post_id;
-
-        if ($id === 0) {
-            $this->tableGateway->insert($data);
-            return;
-        }
-
-        try {
-            $this->findPost($id);
-        } catch (RuntimeException $e) {
-            throw new RuntimeException(
-                sprintf(
-                    'Cannot update album with identifier %d; does not exist',
-                    $id
-                )
-            );
-        }
-
-        $this->tableGateway->update($data, ['post_id' => $id]);
-    }
-
-    public function addViewPost(Post $post)
-    {
-        $data = [
-            'post_view' => $post->post_view + 1,
-        ];
-        $id = (int) $post->post_id;
-
-        if ($id === 0) {
-            $this->tableGateway->insert($data);
-            return;
-        }
-
-        try {
-            $this->findPost($id);
-        } catch (RuntimeException $e) {
-            throw new RuntimeException(
-                sprintf(
-                    'Cannot update album with identifier %d; does not exist',
-                    $id
-                )
-            );
-        }
-
-        $this->tableGateway->update($data, ['post_id' => $id]);
     }
 
 }

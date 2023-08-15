@@ -19,10 +19,14 @@ $count = 0;
         <a href="<?= $this->url('blog') ?>"> Trang chủ </a> /
         <a href="<?= $this->url('blog') ?>">
             <?=
-                $this->escapeHtml($category_name);
+                $this->escapeHtml($name);
             ?>
         </a> /
-        <a href="<?= $this->url('blog') ?>"> Test </a>
+        <a href="<?= $this->url('blog') ?>">
+            <?=
+                $this->escapeHtml($parent);
+            ?>
+        </a>
         <h3>
             <?=
                 $this->escapeHtml($post_title);

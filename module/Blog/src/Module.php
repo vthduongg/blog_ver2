@@ -2,6 +2,7 @@
 
 namespace Blog;
 
+use Blog_Admin\Model\Category;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
@@ -29,6 +30,17 @@ class Module implements ConfigProviderInterface
                     //'post o day la ten bang trong db'
                     return new TableGateway('post', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\CategoryTable::class => function ($container) {
+                    $tableGateway = $container->get(Model\CategoryTableGateway::class);
+                    return new Model\CategoryTable($tableGateway);
+                },
+                Model\CategoryTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Category());
+                    //'post o day la ten bang trong db'
+                    return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
+                }
             ],
         ];
     }
@@ -39,7 +51,8 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\BlogController::class => function ($container) {
                     return new Controller\BlogController(
-                        $container->get(Model\PostTable::class)
+                        $container->get(Model\PostTable::class),
+                        $container->get(Model\CategoryTable::class)
                     );
                 },
             ],
