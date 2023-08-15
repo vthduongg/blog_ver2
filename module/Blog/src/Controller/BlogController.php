@@ -76,14 +76,9 @@ class BlogController extends AbstractActionController
     {
         $id = (int) $this->params()->fromRoute('id', 0);
         $data = $this->postTable->filterForPost($id);
-        echo '<pre>';
-        foreach ($data as $element) {
-            print_r($element);
-        }
-        echo '</pre>';
-        return false;
         return new ViewModel([
-            'postTable' => $this->postTable->filterForPost($id),
+            'postFilter' => $this->postTable->filterForPost($id),
+            'post' => $this->postTable->select(),
         ]);
     }
 

@@ -1,0 +1,82 @@
+<?php
+//foreach trong database no la 1 con tro khi ma loop chay het => mang chua du lieu chi con 
+//lai phan tu cuoi cung nen khong dung duoc foreach nhieu lan vi vay truoc khi muon foreach nhieu lan 
+//nen chuyen ve dang array
+$tmp = array();
+$tmp = $post->toArray();
+
+$tmp2 = array();
+$tmp2 = $postFilter->toArray();
+
+// $tmp = $post;
+
+$count = 0;
+
+?>
+<div class="row">
+    <div class="col-8">
+        <table class="">
+
+            <?php foreach ($tmp2 as $element): ?>
+                <td rowspan="3">
+                    <a href=" <?= $this->url('blog', ['action' => 'detail', 'id' => $element['post_id']]) ?>">
+                        <img src="../../img/blog/<?= $this->escapeHtml($element['post_icon']) ?>"
+                            alt="<?= $this->escapeHtml($element['post_title']) ?>" width="230px">
+                    </a>
+                <td colspan="2" style="font-weight: bold;  font-size: 25px; padding-left: 20px"><a
+                        href=" <?= $this->url('blog', ['action' => 'detail', 'id' => $element['post_id']]) ?>">
+                        <?= $this->escapeHtml($element['post_title']) ?>
+                    </a></td>
+                </td>
+                <tr>
+                    <td style="padding-left: 20px; opacity: 70%; text-decoration:underline; text-decoration-style: dotted">
+                        <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_create_date']))) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 20px">
+                        <?= $this->escapeHtml($element['post_describe']) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+    <hr>
+    <div class="col-4">
+        <table class="">
+            <tr>
+                <h4>Nổi bật</h4>
+            </tr>
+            <?php foreach ($tmp as $element): ?>
+                <?php
+                $count++;
+                if ($count === 6) {
+                    break;
+                }
+                ?>
+                <tr>
+                    <td rowspan="2">
+                        <a href=" <?= $this->url('blog', ['action' => 'detail', 'id' => $element['post_id']]) ?>">
+                            <img src="../../img/blog/<?= $this->escapeHtml($element['post_icon']) ?>"
+                                alt="<?= $this->escapeHtml($element['post_title']) ?>" width="120px">
+
+                        </a>
+                    </td>
+                    <td colspan="2" style="padding-left: 7px;"><a
+                            href=" <?= $this->url('blog', ['action' => 'detail', 'id' => $element['post_id']]) ?>">
+                            <?= $this->escapeHtml($element['post_title']) ?>
+                        </a></td>
+
+                </tr>
+                <tr>
+                    <td style="padding-left: 7px; font-size: 8; opacity: 70%;">
+                        <?= $this->escapeHtml($element['post_author']) ?>
+                    </td>
+                    <td style="padding-left: 7px; font-size: 8; opacity: 70%;">
+                        <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_create_date']))) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

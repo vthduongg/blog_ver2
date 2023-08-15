@@ -66,6 +66,11 @@ class PostTable
         return $this->tableGateway->select(['category_name' => $id]);
     }
 
+    public function filterForCategory($id)
+    {
+
+    }
+
     public function findPost($id)
     {
         $post_id = (int) $id;
