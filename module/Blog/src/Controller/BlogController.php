@@ -55,7 +55,7 @@ class BlogController extends AbstractActionController
         $name = $this->categoryTable->selectCategory($post1->parent_id);
         $blog = $this->postTable->findPost($id);
         $category = $this->postTable->findPost($id);
-        $nameparent = $this->categoryTable->selectCategory($category->category_name);
+        $name_parent = $this->categoryTable->selectCategory($category->category_name);
         $data = new ViewModel([
             'blog' => $this->postTable->select(),
             'post_title' => $blog->post_title,
@@ -63,12 +63,28 @@ class BlogController extends AbstractActionController
             'post_view' => $blog->post_view,
             'post_author' => $blog->post_author,
             'post_content' => $blog->post_content,
+            'category_name' => $blog->category_name,
             'name' => $name->category_name,
-            'parent' => $nameparent->category_name,
+            'parent' => $name_parent->category_name,
         ]);
 
         $this->postTable->addViewPost($post);
         return $data;
+    }
+
+    public function filterAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $data = $this->postTable->filterForPost($id);
+        echo '<pre>';
+        foreach ($data as $element) {
+            print_r($element);
+        }
+        echo '</pre>';
+        return false;
+        return new ViewModel([
+            'postTable' => $this->postTable->filterForPost($id),
+        ]);
     }
 
 

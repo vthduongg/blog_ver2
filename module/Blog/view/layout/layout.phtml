@@ -26,6 +26,7 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <style>
@@ -58,87 +59,123 @@
 
                     <li>
                         <div class="dropdown">
-                            <button style="background-color: #2551a1; border: none;"
-                                class="btn btn-secondary dropdown-toggle" href="https://google.com/" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+
+                            <a style="background-color: #2551a1; border: none;" class="btn btn-secondary" type="button"
+                                id="dropdownMenuButton" href="https://github.dev/vthduongg/blog_administration"
+                                aria-haspopup=" true" aria-expanded="false">
                                 MÁY TÍNH
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Phần mềm máy tính</a>
-                                <a class="dropdown-item" href="#">Game cho máy tính</a>
-                                <a class="dropdown-item" href="#">Thủ thuật máy tính</a>
-                                <a class="dropdown-item" href="#">Cài đặt và hệ điều hành</a>
-                                <a class="dropdown-item" href="#">Tin tức & tư vấn</a>
+                            </a>
+                            <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 6]) ?>">Phần mềm máy
+                                    tính</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 7]) ?>">Game cho máy
+                                    tính</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 8]) ?>">Thủ thuật máy
+                                    tính</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 9]) ?>">Cài đặt và hệ
+                                    điều hành</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 10]) ?>">Tin tức & tư
+                                    vấn</a>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown">
-                            <button style="background-color: #2551a1; border: none;"
-                                class="btn btn-secondary dropdown-toggle" href="<?= $this->url('blog') ?>" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a style="background-color: #2551a1; border: none;" class="btn btn-secondary" type="button"
+                                id="dropdownMenuButton" href="https://github.dev/vthduongg/blog_administration"
+                                aria-haspopup=" true" aria-expanded="false">
                                 ĐIỆN THOẠI
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Thủ thuật Mobile</a>
-                                <a class="dropdown-item" href="#">Game Mobile</a>
-                                <a class="dropdown-item" href="#">Theme, hình nền</a>
-                                <a class="dropdown-item" href="#">Ứng dụng mobile</a>
-                                <a class="dropdown-item" href="#">Tư vấn mobile</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 11]) ?>">Thủ thuật
+                                    Mobile</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 12]) ?>">Game Mobile</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 13]) ?>">Theme, hình
+                                    nền</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 14]) ?>">Ứng dụng
+                                    mobile</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 15]) ?>">Tư vấn
+                                    mobile</a>
                             </div>
                         </div>
                     </li>
 
                     <li>
                         <div class="dropdown">
-                            <button style="background-color: #2551a1; border: none;"
-                                class="btn btn-secondary dropdown-toggle" href="<?= $this->url('blog') ?>" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a style="background-color: #2551a1; border: none;" class="btn btn-secondary" type="button"
+                                id="dropdownMenuButton" href="https://github.dev/vthduongg/blog_administration"
+                                aria-haspopup=" true" aria-expanded="false">
                                 THỦ THUẬT
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Thủ thuật Email</a>
-                                <a class="dropdown-item" href="#">Thủ thuật về Office</a>
-                                <a class="dropdown-item" href="#">Thủ thuật Facebook</a>
-                                <a class="dropdown-item" href="#">Xử lý ảnh video</a>
-                                <a class="dropdown-item" href="#">Lưu trữ</a>
-                                <a class="dropdown-item" href="#">Internet</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 16]) ?>">Thủ thuật
+                                    Email</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 17]) ?>">Thủ thuật về
+                                    Office</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 18]) ?>">Thủ thuật
+                                    Facebook</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 19]) ?>">Xử
+                                    lý ảnh video</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 20]) ?>">Lưu trữ</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 21]) ?>">Internet</a>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown">
-                            <button style="background-color: #2551a1; border: none;"
-                                class="btn btn-secondary dropdown-toggle" href="<?= $this->url('blog') ?>" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a style="background-color: #2551a1; border: none;" class="btn btn-secondary" type="button"
+                                id="dropdownMenuButton" href="https://github.dev/vthduongg/blog_administration"
+                                aria-haspopup=" true" aria-expanded="false">
                                 CẨM NANG
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Kỹ năng sống</a>
-                                <a class="dropdown-item" href="#">Kỹ năng công việc</a>
-                                <a class="dropdown-item" href="#">Học tập</a>
-                                <a class="dropdown-item" href="#">Làm đẹp</a>
-                                <a class="dropdown-item" href="#">Du lịch</a>
-                                <a class="dropdown-item" href="#">Quà tặng</a>
-                                <a class="dropdown-item" href="#">Lễ tết</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 22]) ?>">Kỹ năng
+                                    sống</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 23]) ?>">Kỹ năng công
+                                    việc</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 25]) ?>">Học tập</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 26]) ?>">Làm đẹp</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 27]) ?>">Du lịch</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 28]) ?>">Quà tặng</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 29]) ?>">Lễ tết</a>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown">
-                            <button style="background-color: #2551a1 ; border: none;"
-                                class="btn btn-secondary dropdown-toggle" href="<?= $this->url('blog') ?>" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a style="background-color: #2551a1; border: none;" class="btn btn-secondary" type="button"
+                                id="dropdownMenuButton" href="https://github.dev/vthduongg/blog_administration"
+                                aria-haspopup=" true" aria-expanded="false">
                                 WEB & HỆ THỐNG
-                            </button>
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Website</a>
-                                <a class="dropdown-item" href="#">Hệ thống</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 30]) ?>">Website</a>
+                                <a class="dropdown-item"
+                                    href="<?= $this->url('blog', ['action' => 'filter', 'id' => 31]) ?>">Hệ thống</a>
                             </div>
                         </div>
                     </li>

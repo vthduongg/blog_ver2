@@ -22,7 +22,7 @@ $count = 0;
                 $this->escapeHtml($name);
             ?>
         </a> /
-        <a href="<?= $this->url('blog') ?>">
+        <a href="<?= $this->url('blog', ['action' => 'filter', 'id' => $category_name]) ?>">
             <?=
                 $this->escapeHtml($parent);
             ?>
