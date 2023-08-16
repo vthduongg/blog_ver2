@@ -1,6 +1,6 @@
 <?php
 
-$title = "Danh sach bai post";
+$title = "Danh sách bài post";
 $this->headTitle($title);
 
 // $tmp = array();
@@ -24,11 +24,9 @@ $this->headTitle($title);
         <tr>
             <th>Post_title</th>
             <th style="width = 10%">Post_icon</th>
-            <th>Post_describe</th>
             <th>Post_create_date</th>
             <th>Post_author</th>
             <th>Post_view</th>
-            <th>Post_content</th>
             <th>Post_last_modify</th>
             <th>Category_name</th>
             <th>Post_status</th>
@@ -45,9 +43,7 @@ $this->headTitle($title);
                     <img src="img/blog/<?= $this->escapeHtml($element->post_icon) ?>"
                         alt="<?= $this->escapeHtml($element->post_icon) ?>" width="120px">
                 </td>
-                <td>
-                    <?= $this->escapeHtml(limitContent($element['post_describe'], 70)) ?>
-                </td>
+
                 <td>
                     <!-- Doi dinh dang ngay tu y/m/d sang d/m/y -->
                     <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_create_date']))) ?>
@@ -58,9 +54,7 @@ $this->headTitle($title);
                 <td>
                     <?= $this->escapeHtml($element->post_view) ?>
                 </td>
-                <td>
-                    <?= $this->escapeHtml(limitContent($element['post_content'], 70)) ?>
-                </td>
+
                 <td>
                     <?= $this->escapeHtml(date("d/m/Y", strtotime($element['post_last_modify']))) ?>
                 </td>

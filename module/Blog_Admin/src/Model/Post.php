@@ -14,6 +14,7 @@ class Post
     public $post_last_modify;
     public $category_name;
     public $post_status;
+    public $parent_id;
 
     public function exchangeArray(array $data)
     {
@@ -28,6 +29,8 @@ class Post
         $this->post_last_modify = !empty($data['post_last_modify']) ? $data['post_last_modify'] : null;
         $this->category_name = !empty($data['category_name']) ? $data['category_name'] : null;
         $this->post_status = !empty($data['post_status']) ? $data['post_status'] : null;
+        $this->parent_id = !empty($data['parent_id']) ? $data['parent_id'] : null;
+
     }
 
     public function getArrayCopy()
@@ -43,7 +46,8 @@ class Post
             'post_content' => $this->post_content,
             'post_last_modify' => $this->post_last_modify,
             'category_name' => $this->category_name,
-            'post_status' => $this->post_status
+            'post_status' => $this->post_status,
+            'parent_id' => $this->parent_id,
         ];
     }
 }

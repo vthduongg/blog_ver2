@@ -64,7 +64,8 @@ class PostTable
             'post_content' => $post->post_content,
             'post_last_modify' => $post->post_last_modify,
             'category_name' => $post->category_name,
-            'post_status' => $post->post_status
+            'post_status' => $post->post_status,
+            'parent_id' => $post->parent_id,
         ];
         $id = (int) $post->post_id;
         if ($id <= 0) {

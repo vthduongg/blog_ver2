@@ -64,6 +64,7 @@ class Blog_AdminController extends AbstractActionController
         $data['post_last_modify'] = date("Y-m-d");
         $data['post_status'] = 1;
         $data['post_icon'] = $newName;
+        $data['parent_id'] = 1;
         $post = new Post();
         $post->exchangeArray($data);
         $this->table->savePost($post);
